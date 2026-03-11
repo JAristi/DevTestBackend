@@ -3,7 +3,7 @@ services:
     name: franchise-api
     runtime: docker
     repo: https://github.com/JAristi/franchise-api  # ← CAMBIA ESTO
-    branch: main
+    branch: master
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: franchise-api
+    runtime: docker
+    repo: https://github.com/JAristi/DevTestBackend
+    branch: master
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://${RDS_ENDPOINT}:3306/franchise_db
+      - key: SPRING_DATASOURCE_USERNAME
+        value: admin
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: Admin123!
+      - key: SPRING_REDIS_HOST
+        value: redis
+      - key: SPRING_REDIS_PORT
+        value: 6379
+
+  - type: redis
+    name: redis
+    plan: free
+    maxmemoryPolicy: noeviction
+    ipAllowList: []

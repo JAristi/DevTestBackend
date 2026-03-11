@@ -2,7 +2,7 @@ services:
   - type: web
     name: franchise-api
     runtime: docker
-    repo: https://github.com/JAristi/franchise-api  # ← CAMBIA ESTO
+    repo: https://github.com/JAristi/DevTestBackend  # ← CAMBIA ESTO
     branch: master
     plan: free
     dockerfilePath: ./Dockerfile

@@ -200,6 +200,28 @@ curl -X POST "http://localhost:8080/api/franchises/branches/1/products?name=Malt
 
 ---
 
+## 🧪 Pruebas unitarias
+
+El proyecto  incluye pruebas unitarias para garantizar el correcto funcionamiento de los componentes más críticos.
+
+| Modulo     | Clase de prueba         | Métodos probados                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Service    | FranchiseServiceTest    | • Crear franquicia<br/>•Agregar sucursal<br/> •Obtener top productos <br/> •Actualizar stock con invalidación de caché                                                                                                                                                                                                                                                                                                                                                |
+| Controller | FranchiseControllerTest | • POST /api/franchises - crear franquicia<br/> •PUT /api/franchises/{id} – Actualizar franquicia<br/>•POST /api/franchises/{franchiseId}/branches – Agregar sucursal <br/>•PUT /api/franchises/branches/{id} – Actualizar sucursal <br/>•POST /api/franchises/branches/{branchId}/products – Agregar producto <br/>•PUT /api/franchises/products/{id} – Actualizar producto<br/>•PUT /api/franchises/products/{productId}/stock – Actualizar stock<br/>•DELETE /api/franchises/franchises/{franchiseId}/branches/{branchId}/products/{productId} – Eliminar producto <br/>•GET /api/franchises/{franchiseId}/top-products – Obtener top productos |
+
+### 🚀 Ejecutar las pruebas
+
+Para ejecutar las pruebas:
+```bash
+mvn clean test
+```
+
+### ✅ Resultado esperado
+```bash
+[INFO] Tests run: X, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+```
+
 ## ⚙️ Configuración con Docker Compose
 
 El archivo `docker-compose.yml` define tres servicios:

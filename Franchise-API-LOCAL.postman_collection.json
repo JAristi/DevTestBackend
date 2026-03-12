@@ -1,0 +1,200 @@
+{
+  "info": {
+    "name": "Franchise API - Local",
+    "description": "Colección para probar la API de Franquicias en **entorno local**.\n\n**URL Base:** http://localhost:8080\n\n**Requisito:** Tener la aplicación corriendo con Docker:\n```bash\ndocker-compose up -d\n```\n\n**Datos iniciales en BD (RDS AWS):**\n- Franquicia 1: 'Franchise Norte'\n- Franquicia 2: 'Franchise Centro'\n- Sucursal 1 (de Franquicia 1): 'Sucursal Medellin'\n- Sucursal 2 (de Franquicia 1): 'Sucursal Bogota'\n- Sucursal 3 (de Franquicia 2): 'Sucursal Cali'\n- Productos con stocks iniciales",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Franquicias",
+      "item": [
+        {
+          "name": "Crear Franquicia",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises?name=Nueva Franquicia Local",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Nueva Franquicia Local",
+                  "description": "Nombre de la franquicia a crear"
+                }
+              ]
+            },
+            "description": "Crea una nueva franquicia. Retorna la franquicia creada con su ID."
+          }
+        },
+        {
+          "name": "Actualizar Franquicia",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/1?name=Franchise Norte Actualizada",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "1"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Franchise Norte Actualizada",
+                  "description": "Nuevo nombre de la franquicia"
+                }
+              ]
+            },
+            "description": "Actualiza el nombre de la franquicia con ID 1."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Sucursales",
+      "item": [
+        {
+          "name": "Agregar Sucursal a Franquicia",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/1/branches?name=Nueva Sucursal Local",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "1", "branches"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Nueva Sucursal Local",
+                  "description": "Nombre de la sucursal a crear"
+                }
+              ]
+            },
+            "description": "Agrega una sucursal a la franquicia con ID 1."
+          }
+        },
+        {
+          "name": "Actualizar Sucursal",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/branches/1?name=Sucursal Medellin Actualizada",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "branches", "1"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Sucursal Medellin Actualizada",
+                  "description": "Nuevo nombre de la sucursal"
+                }
+              ]
+            },
+            "description": "Actualiza el nombre de la sucursal con ID 1 (Sucursal Medellin)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Productos",
+      "item": [
+        {
+          "name": "Agregar Producto a Sucursal",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/branches/1/products?name=Malteada&stock=25",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "branches", "1", "products"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Malteada",
+                  "description": "Nombre del producto"
+                },
+                {
+                  "key": "stock",
+                  "value": "25",
+                  "description": "Cantidad inicial en stock"
+                }
+              ]
+            },
+            "description": "Agrega un producto a la sucursal con ID 1 (Sucursal Medellin)."
+          }
+        },
+        {
+          "name": "Actualizar Nombre Producto",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/products/1?name=Hamburguesa Especial",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "products", "1"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Hamburguesa Especial",
+                  "description": "Nuevo nombre del producto"
+                }
+              ]
+            },
+            "description": "Actualiza el nombre del producto con ID 1 (Hamburguesa)."
+          }
+        },
+        {
+          "name": "Actualizar Stock Producto",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/products/1/stock?stock=75",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "products", "1", "stock"],
+              "query": [
+                {
+                  "key": "stock",
+                  "value": "75",
+                  "description": "Nuevo stock del producto"
+                }
+              ]
+            },
+            "description": "Actualiza el stock del producto con ID 1 (Hamburguesa)."
+          }
+        },
+        {
+          "name": "Eliminar Producto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/franchises/1/branches/1/products/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "franchises", "1", "branches", "1", "products", "1"]
+            },
+            "description": "Elimina el producto con ID 1 de la sucursal 1 en la franquicia 1."
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Reporte Especial",
+      "item": [
+        {
+          "name": "Top Productos por Franquicia",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/franchises/1/top-products",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "franchises", "1", "top-products"]
+            },
+            "description": "Obtiene el producto con mayor stock en cada sucursal de la franquicia con ID 1.\n\n**Ejemplo de respuesta exitosa:**\n```json\n[\n  {\n    \"branchName\": \"Sucursal Medellin\",\n    \"productName\": \"Hamburguesa\",\n    \"stock\": 50\n  },\n  {\n    \"branchName\": \"Sucursal Bogota\",\n    \"productName\": \"Hot Dog\",\n    \"stock\": 20\n  },\n  {\n    \"branchName\": \"Sucursal Cali\",\n    \"productName\": \"Papas Fritas\",\n    \"stock\": 40\n  }\n]\n```"
+          }
+        }
+      ]
+    }
+  ]
+}

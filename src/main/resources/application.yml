@@ -7,7 +7,7 @@ spring:
 
     hikari:
       initializationFailTimeout: 180000
-      connectionTimeout: 60000
+      connectionTimeout: 180000
 
   jpa:
     hibernate:

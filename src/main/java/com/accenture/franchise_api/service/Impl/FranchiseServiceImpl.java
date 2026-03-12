@@ -10,10 +10,12 @@ import com.accenture.franchise_api.repository.ProductRepository;
 import com.accenture.franchise_api.service.FranchiseService;
 import com.accenture.franchise_api.service.RedisCacheService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FranchiseServiceImpl implements FranchiseService {
@@ -109,7 +111,13 @@ public class FranchiseServiceImpl implements FranchiseService {
                 .getFranchise()
                 .getId();
 
-        redisCacheService.delete(cacheKey).subscribe();
+        redisCacheService.delete(cacheKey)
+                .doOnNext(deleted -> {
+                    if (deleted) {
+                        log.debug("Caché invalidada correctamente: {}", cacheKey);
+                    }
+                })
+                .subscribe();
 
         return saved;
     }
@@ -132,19 +140,17 @@ public class FranchiseServiceImpl implements FranchiseService {
     @Override
     public List<TopProductDTO> getTopProducts(Long franchiseId) {
 
-        String cacheKey = "topProducts:" + franchiseId;
+        // 🟢 COMENTADO TEMPORALMENTE - REDIS DESHABILITADO
+        // String cacheKey = "topProducts:" + franchiseId;
+        // List<TopProductDTO> cached = redisCacheService
+        //         .get(cacheKey, List.class)
+        //         .map(list -> (List<TopProductDTO>) list)
+        //         .block();
+        // if (cached != null) {
+        //     return cached;
+        // }
 
-        List<TopProductDTO> cached = redisCacheService
-                .get(cacheKey, List.class)
-                .map(list -> (List<TopProductDTO>) list)
-                .block();
-
-        if (cached != null) {
-            return cached;
-        }
-
-        List<Product> products =
-                productRepository.findTopStockProducts(franchiseId);
+        List<Product> products = productRepository.findTopStockProducts(franchiseId);
 
         List<TopProductDTO> result = products
                 .stream()
@@ -157,7 +163,8 @@ public class FranchiseServiceImpl implements FranchiseService {
                 ))
                 .toList();
 
-        redisCacheService.save(cacheKey, result).subscribe();
+        // 🟢 COMENTADO TEMPORALMENTE - REDIS DESHABILITADO
+        // redisCacheService.save(cacheKey, result).subscribe();
 
         return result;
     }

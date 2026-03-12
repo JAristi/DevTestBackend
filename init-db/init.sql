@@ -1,18 +1,18 @@
 -- Create tables if not exists
 CREATE TABLE IF NOT EXISTS franchise (
-    id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS branch (
-    id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     franchise_id BIGINT,
     FOREIGN KEY (franchise_id) REFERENCES franchise(id)
 );
 
 CREATE TABLE IF NOT EXISTS product (
-    id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     stock INT NOT NULL,
     branch_id BIGINT,

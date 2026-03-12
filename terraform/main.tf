@@ -69,11 +69,3 @@ resource "aws_db_instance" "franchise_db" {
     Environment = "development"
   }
 }
-
-output "rds_endpoint" {
-  value = aws_db_instance.franchise_db.address
-}
-
-output "rds_port" {
-  value = aws_db_instance.franchise_db.port
-}

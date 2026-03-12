@@ -89,7 +89,7 @@ Este comando levantará tres servicios:
 docker ps
 ```
 
-Deberías ver:
+Resultado esperado:
 ```
 CONTAINER ID   IMAGE                       PORTS                    NAMES
 xxxxxxxxxxxx   franchise-api:latest        0.0.0.0:8080->8080/tcp   franchise_api
